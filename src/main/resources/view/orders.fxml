@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nntc.svg52.fxapp.controller.OrderController">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+
+    <left>
+        <VBox spacing="10" prefWidth="500">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Список заказов" />
+
+            <TableView fx:id="ordersTable" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="orderIdColumn" prefWidth="60" text="№" />
+                    <TableColumn fx:id="tableNumberColumn" prefWidth="80" text="Стол" />
+                    <TableColumn fx:id="statusColumn" prefWidth="100" text="Статус" />
+                    <TableColumn fx:id="createdAtColumn" prefWidth="130" text="Время" />
+                    <TableColumn fx:id="totalColumn" prefWidth="100" text="Сумма" />
+                </columns>
+            </TableView>
+
+            <HBox spacing="10">
+                <Button fx:id="acceptOrderButton" onAction="#handleAcceptOrder" text="Принять заказ" />
+                <Button fx:id="completeOrderButton" onAction="#handleCompleteOrder" text="Завершить заказ" />
+                <Button fx:id="cancelOrderButton" onAction="#handleCancelOrder" text="Отменить заказ" />
+                <Button fx:id="refreshButton" onAction="#handleRefresh" text="Обновить" />
+            </HBox>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10" prefWidth="300">
+            <padding>
+                <Insets left="10" />
+            </padding>
+
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Детали заказа" />
+
+            <Label fx:id="orderStatusLabel" text="Статус: " />
+
+            <TableView fx:id="orderItemsTable" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="itemDishColumn" prefWidth="120" text="Блюдо" />
+                    <TableColumn fx:id="itemQuantityColumn" prefWidth="50" text="Кол-во" />
+                    <TableColumn fx:id="itemPriceColumn" prefWidth="60" text="Цена" />
+                    <TableColumn fx:id="itemSubtotalColumn" prefWidth="70" text="Сумма" />
+                </columns>
+            </TableView>
+
+            <TextArea fx:id="orderDetailsArea" editable="false" prefHeight="80" wrapText="true" />
+
+            <Label fx:id="orderTotalLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Итого: 0 руб." />
+        </VBox>
+    </center>
+</BorderPane>

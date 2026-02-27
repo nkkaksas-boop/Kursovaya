@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nntc.svg52.fxapp.controller.MenuController">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+
+    <left>
+        <VBox spacing="10" prefWidth="400">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Меню ресторана" />
+
+            <TableView fx:id="dishesTable" prefHeight="300">
+                <columns>
+                    <TableColumn fx:id="nameColumn" prefWidth="150" text="Название" />
+                    <TableColumn fx:id="categoryColumn" prefWidth="100" text="Категория" />
+                    <TableColumn fx:id="priceColumn" prefWidth="80" text="Цена" />
+                    <TableColumn fx:id="availabilityColumn" prefWidth="80" text="Статус" />
+                </columns>
+            </TableView>
+
+            <Label text="Описание:" />
+            <TextArea fx:id="dishDescriptionArea" editable="false" prefHeight="80" wrapText="true" />
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10" prefWidth="350">
+            <padding>
+                <Insets left="10" />
+            </padding>
+
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Корзина" />
+
+            <TableView fx:id="cartTable" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="cartDishColumn" prefWidth="120" text="Блюдо" />
+                    <TableColumn fx:id="cartQuantityColumn" prefWidth="60" text="Кол-во" />
+                    <TableColumn fx:id="cartPriceColumn" prefWidth="70" text="Цена" />
+                    <TableColumn fx:id="cartSubtotalColumn" prefWidth="80" text="Сумма" />
+                </columns>
+            </TableView>
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Количество:" />
+                <TextField fx:id="quantityField" prefWidth="60" promptText="1" />
+                <Button fx:id="addToCartButton" onAction="#handleAddToCart" text="Добавить" />
+                <Button fx:id="removeFromCartButton" onAction="#handleRemoveFromCart" text="Удалить" />
+            </HBox>
+
+            <Label text="Особые пожелания:" />
+            <TextArea fx:id="specialRequestsField" prefHeight="60" promptText="Без лука, без соли и т.д." wrapText="true" />
+
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Номер стола:" />
+                <TextField fx:id="tableNumberField" prefWidth="60" promptText="1" />
+            </HBox>
+
+            <Separator />
+
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Label fx:id="totalAmountLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Итого: 0 руб." />
+                <Button fx:id="createOrderButton" onAction="#handleCreateOrder" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Оформить заказ" />
+            </HBox>
+
+            <HBox alignment="CENTER_RIGHT">
+                <Button fx:id="manageMenuButton" onAction="#handleManageMenu" text="Управление меню" visible="false" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

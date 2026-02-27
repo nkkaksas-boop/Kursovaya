@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nntc.svg52.fxapp.controller.MenuManagementController">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+
+    <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Управление меню" />
+
+    <TableView fx:id="dishesTable" prefHeight="250">
+        <columns>
+            <TableColumn fx:id="idColumn" prefWidth="50" text="ID" />
+            <TableColumn fx:id="nameColumn" prefWidth="150" text="Название" />
+            <TableColumn fx:id="categoryColumn" prefWidth="100" text="Категория" />
+            <TableColumn fx:id="priceColumn" prefWidth="80" text="Цена" />
+            <TableColumn fx:id="availableColumn" prefWidth="80" text="Доступно" />
+        </columns>
+    </TableView>
+
+    <TitledPane animated="false" text="Редактирование блюда">
+        <VBox spacing="10">
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" minWidth="80" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="200" />
+                </columnConstraints>
+
+                <Label text="Название:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Категория:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <ComboBox fx:id="categoryCombo" editable="true" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Цена:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Описание:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextArea fx:id="descriptionField" prefHeight="60" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label text="Доступно:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <CheckBox fx:id="availableCheckbox" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Button onAction="#handleAdd" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Добавить" />
+                <Button onAction="#handleUpdate" text="Обновить" />
+                <Button onAction="#handleDelete" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="Удалить" />
+                <Button onAction="#handleClear" text="Очистить" />
+            </HBox>
+        </VBox>
+    </TitledPane>
+
+    <HBox alignment="CENTER_RIGHT">
+        <Button onAction="#handleBack" text="Назад к меню" />
+    </HBox>
+</VBox>

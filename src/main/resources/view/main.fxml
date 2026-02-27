@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nntc.svg52.fxapp.controller.MainController">
+    <top>
+        <VBox>
+            <MenuBar fx:id="menuBar">
+                <Menu fx:id="fileMenu" text="Файл">
+                    <MenuItem fx:id="settingsMenuItem" onAction="#handleSettings" text="Настройки" />
+                    <SeparatorMenuItem />
+                    <MenuItem fx:id="exitMenuItem" onAction="#handleExit" text="Выход" />
+                </Menu>
+                <Menu fx:id="editMenu" text="Заказы">
+                    <MenuItem onAction="#showOrders" text="Просмотр заказов" />
+                </Menu>
+                <Menu fx:id="helpMenu" text="Справка">
+                    <MenuItem fx:id="aboutMenuItem" onAction="#handleAbout" text="О программе" />
+                </Menu>
+            </MenuBar>
+
+            <ToolBar>
+                <Label fx:id="userRoleLabel" text="Роль: " />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button onAction="#showMenuManagement" text="Управление меню" visible="false" fx:id="manageMenuButton" />
+                <Button onAction="#showOrders" text="Заказы" />
+            </ToolBar>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox fx:id="contentArea" spacing="10">
+            <padding>
+                <javafx.geometry.Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+        </VBox>
+    </center>
+
+    <bottom>
+        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="© 2025 Хозяинов Андрей, ЗИСиП-23-1" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="10" />
+            </font>
+        </Label>
+    </bottom>
+</BorderPane>
