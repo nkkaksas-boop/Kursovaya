@@ -4,71 +4,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nntc.svg52.fxapp.controller.MenuController">
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nntc.svg52.fxapp.controller.OrderController">
     <padding>
         <Insets bottom="10" left="10" right="10" top="10" />
     </padding>
 
     <left>
-        <VBox spacing="10" prefWidth="400">
-            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Меню ресторана" />
+        <VBox spacing="10" prefWidth="500">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Список заказов" />
 
-            <TableView fx:id="dishesTable" prefHeight="300">
+            <TableView fx:id="ordersTable" prefHeight="400">
                 <columns>
-                    <TableColumn fx:id="nameColumn" prefWidth="150" text="Название" />
-                    <TableColumn fx:id="categoryColumn" prefWidth="100" text="Категория" />
-                    <TableColumn fx:id="priceColumn" prefWidth="80" text="Цена" />
-                    <TableColumn fx:id="availabilityColumn" prefWidth="80" text="Статус" />
+                    <TableColumn fx:id="orderIdColumn" prefWidth="60" text="№" />
+                    <TableColumn fx:id="tableNumberColumn" prefWidth="80" text="Стол" />
+                    <TableColumn fx:id="statusColumn" prefWidth="100" text="Статус" />
+                    <TableColumn fx:id="createdAtColumn" prefWidth="130" text="Время" />
+                    <TableColumn fx:id="totalColumn" prefWidth="100" text="Сумма" />
                 </columns>
             </TableView>
 
-            <Label text="Описание:" />
-            <TextArea fx:id="dishDescriptionArea" editable="false" prefHeight="80" wrapText="true" />
+            <HBox spacing="10">
+                <Button fx:id="acceptOrderButton" onAction="#handleAcceptOrder" text="Принять заказ" />
+                <Button fx:id="completeOrderButton" onAction="#handleCompleteOrder" text="Завершить заказ" />
+                <Button fx:id="cancelOrderButton" onAction="#handleCancelOrder" text="Отменить заказ" />
+            </HBox>
         </VBox>
     </left>
 
     <center>
-        <VBox spacing="10" prefWidth="350">
+        <VBox spacing="10" prefWidth="300">
             <padding>
                 <Insets left="10" />
             </padding>
 
-            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Корзина" />
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Детали заказа" />
 
-            <TableView fx:id="cartTable" prefHeight="200">
+            <Label fx:id="orderStatusLabel" text="Статус: " />
+
+            <TableView fx:id="orderItemsTable" prefHeight="200">
                 <columns>
-                    <TableColumn fx:id="cartDishColumn" prefWidth="120" text="Блюдо" />
-                    <TableColumn fx:id="cartQuantityColumn" prefWidth="60" text="Кол-во" />
-                    <TableColumn fx:id="cartPriceColumn" prefWidth="70" text="Цена" />
-                    <TableColumn fx:id="cartSubtotalColumn" prefWidth="80" text="Сумма" />
+                    <TableColumn fx:id="itemDishColumn" prefWidth="120" text="Блюдо" />
+                    <TableColumn fx:id="itemQuantityColumn" prefWidth="50" text="Кол-во" />
+                    <TableColumn fx:id="itemPriceColumn" prefWidth="60" text="Цена" />
+                    <TableColumn fx:id="itemSubtotalColumn" prefWidth="70" text="Сумма" />
                 </columns>
             </TableView>
 
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <Label text="Количество:" />
-                <TextField fx:id="quantityField" prefWidth="60" promptText="1" />
-                <Button fx:id="addToCartButton" onAction="#handleAddToCart" text="Добавить" />
-                <Button fx:id="removeFromCartButton" onAction="#handleRemoveFromCart" text="Удалить" />
-            </HBox>
+            <TextArea fx:id="orderDetailsArea" editable="false" prefHeight="80" wrapText="true" />
 
-            <Label text="Особые пожелания:" />
-            <TextArea fx:id="specialRequestsField" prefHeight="60" promptText="Без лука, без соли и т.д." wrapText="true" />
-
-            <HBox alignment="CENTER_LEFT" spacing="10">
-                <Label text="Номер стола:" />
-                <TextField fx:id="tableNumberField" prefWidth="60" promptText="1" />
-            </HBox>
-
-            <Separator />
-
-            <HBox alignment="CENTER_RIGHT" spacing="10">
-                <Label fx:id="totalAmountLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Итого: 0 руб." />
-                <Button fx:id="createOrderButton" onAction="#handleCreateOrder" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Оформить заказ" />
-            </HBox>
-
-            <HBox alignment="CENTER_RIGHT">
-                <Button fx:id="manageMenuButton" onAction="#handleManageMenu" text="Управление меню" visible="false" />
-            </HBox>
+            <Label fx:id="orderTotalLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Итого: 0 руб." />
         </VBox>
     </center>
 </BorderPane>

@@ -2,6 +2,7 @@ package nntc.svg52.fxapp.model.dao;
 
 import nntc.svg52.fxapp.model.DatabaseManager;
 import nntc.svg52.fxapp.model.entities.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,24 +10,25 @@ import java.util.List;
 
 public class UserDAO {
 
-    public User authenticate(String username, String password) {
-        String sql = "SELECT u.*, r.name as role_name FROM users u JOIN roles r ON u.role_id = r.id WHERE u.username = ? AND u.password = ?";
-
+    public User authenticate(String username, String plainPassword) {
+        String sql = "SELECT u.*, r.name as role_name FROM users u JOIN roles r ON u.role_id = r.id WHERE u.username = ?";
         try (Connection conn = DatabaseManager.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, username);
-            pstmt.setString(2, password); // В реальном проекте нужно хэшировать!
-
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));           // id это int, не String!
-                user.setUsername(rs.getString("username"));
-                user.setRoleId(rs.getInt("role_id"));  // role_id это int!
-                user.setRoleName(rs.getString("role_name"));
-                user.setFullName(rs.getString("full_name"));
-                return user;
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String storedHash = rs.getString("password");
+                    if (BCrypt.checkpw(plainPassword, storedHash)) {
+                        User user = new User();
+                        user.setId(rs.getInt("id"));
+                        user.setUsername(rs.getString("username"));
+                        user.setRoleId(rs.getInt("role_id"));
+                        user.setRoleName(rs.getString("role_name"));
+                        user.setFullName(rs.getString("full_name"));
+                        return user;
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -104,7 +106,6 @@ public class UserDAO {
     }
 
     public boolean deleteUser(int userId) {
-        // Запрос подтверждения должен быть на уровне UI
         String sql = "DELETE FROM users WHERE id = ?";
 
         try (Connection conn = DatabaseManager.getInstance().getConnection();

@@ -6,65 +6,108 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
+
     private int id;
     private int userId;
-    private String userName;
     private int tableNumber;
-    private String status; // active, completed, cancelled
+    private String status;
     private String specialRequests;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    // Добавлено поле и геттер/сеттер для имени пользователя (из JOIN с таблицей users)
+    private String userName;
+
     private List<OrderItem> items = new ArrayList<>();
 
-    public Order() {}
-
-    public Order(int id, int userId, int tableNumber, String status, String specialRequests) {
-        this.id = id;
-        this.userId = userId;
-        this.tableNumber = tableNumber;
-        this.status = status;
-        this.specialRequests = specialRequests;
+    // Конструкторы (можно оставить пустой или добавить при необходимости)
+    public Order() {
     }
 
     // Геттеры и сеттеры
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
-
-    public String getUserName() { return userName; }
-    public void setUserName(String userName) { this.userName = userName; }
-
-    public int getTableNumber() { return tableNumber; }
-    public void setTableNumber(int tableNumber) { this.tableNumber = tableNumber; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-
-    public String getSpecialRequests() { return specialRequests; }
-    public void setSpecialRequests(String specialRequests) { this.specialRequests = specialRequests; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
-
-    public List<OrderItem> getItems() { return items; }
-    public void setItems(List<OrderItem> items) { this.items = items; }
-
-    public void addItem(OrderItem item) {
-        items.add(item);
+    public int getId() {
+        return id;
     }
 
-    public BigDecimal getTotalAmount() {
-        return items.stream()
-                .map(OrderItem::getSubtotal)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public boolean isActive() { return "active".equals(status); }
-    public boolean isCompleted() { return "completed".equals(status); }
-    public boolean isCancelled() { return "cancelled".equals(status); }
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getSpecialRequests() {
+        return specialRequests;
+    }
+
+    public void setSpecialRequests(String specialRequests) {
+        this.specialRequests = specialRequests;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
+    // Добавленные методы именно для userName
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    // Можно добавить удобный метод для отображения (опционально)
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", tableNumber=" + tableNumber +
+                ", status='" + status + '\'' +
+                ", userName='" + userName + '\'' +
+                ", items count=" + items.size() +
+                '}';
+    }
 }

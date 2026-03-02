@@ -11,19 +11,6 @@ public class OrderItem {
     private BigDecimal priceAtTime;
     private String notes;
 
-    public OrderItem() {}
-
-    public OrderItem(int id, int orderId, int dishId, String dishName,
-                     int quantity, BigDecimal priceAtTime, String notes) {
-        this.id = id;
-        this.orderId = orderId;
-        this.dishId = dishId;
-        this.dishName = dishName;
-        this.quantity = quantity;
-        this.priceAtTime = priceAtTime;
-        this.notes = notes;
-    }
-
     // Геттеры и сеттеры
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -47,6 +34,7 @@ public class OrderItem {
     public void setNotes(String notes) { this.notes = notes; }
 
     public BigDecimal getSubtotal() {
+        if (priceAtTime == null) return BigDecimal.ZERO;
         return priceAtTime.multiply(BigDecimal.valueOf(quantity));
     }
 }

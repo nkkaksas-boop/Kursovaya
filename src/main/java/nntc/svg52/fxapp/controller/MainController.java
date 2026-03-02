@@ -41,7 +41,9 @@ public class MainController {
     public void setMainApp(DesktopApplication mainApp, String userRole) {
         this.mainApp = mainApp;
         this.userRole = userRole;
-        userRoleLabel.setText("Роль: " + userRole);
+        if (userRoleLabel != null) {
+            userRoleLabel.setText("Роль: " + (userRole != null ? userRole : "—"));
+        }
         loadDefaultContent();
     }
 

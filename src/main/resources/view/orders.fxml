@@ -27,7 +27,6 @@
                 <Button fx:id="acceptOrderButton" onAction="#handleAcceptOrder" text="Принять заказ" />
                 <Button fx:id="completeOrderButton" onAction="#handleCompleteOrder" text="Завершить заказ" />
                 <Button fx:id="cancelOrderButton" onAction="#handleCancelOrder" text="Отменить заказ" />
-                <Button fx:id="refreshButton" onAction="#handleRefresh" text="Обновить" />
             </HBox>
         </VBox>
     </left>
